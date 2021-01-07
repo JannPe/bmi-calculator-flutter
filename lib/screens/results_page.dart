@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
-import 'reusable_card.dart';
+import '../constants.dart';
+import '../components/reusable_card.dart';
+import '../components/bottom_button.dart';
 
 class ResultsPage extends StatelessWidget {
+  ResultsPage(
+      {@required this.bmiResult,
+      @required this.resultText,
+      @required this.resultInterpretation});
+
+  final String bmiResult;
+  final String resultText;
+  final String resultInterpretation;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +24,11 @@ class ResultsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            child: Text('Your Result', style: kTitleTextStyle),
+            child: Container(
+              padding: EdgeInsets.all(15.0),
+              child: Text('Your Result',
+                  style: kTitleTextStyle, textAlign: TextAlign.center),
+            ),
           ),
           Expanded(
             flex: 5,
@@ -24,14 +38,19 @@ class ResultsPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('Normal', style: kResultTextStyle),
-                  Text('18.3', style: kBMITextStyle),
-                  Text('Your BMI results is bad.',
+                  Text(resultText.toUpperCase(), style: kResultTextStyle),
+                  Text(bmiResult, style: kBMITextStyle),
+                  Text(resultInterpretation,
                       style: kBodyTextStyle, textAlign: TextAlign.center)
                 ],
               ),
             ),
           ),
+          BottomButton(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              buttonTitle: 'RE-CALCULATE')
         ],
       ),
     );
