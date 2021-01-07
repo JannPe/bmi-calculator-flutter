@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'gender_card_content.dart';
 import 'reusable_card.dart';
 import 'constants.dart';
+import 'results_page.dart';
 
 enum Gender {
   male,
@@ -207,13 +209,39 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kBottomContainerColor,
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: kBottomContainerHeight,
-          ),
+          BottomButton(),
         ],
+      ),
+    );
+  }
+}
+
+class BottomButton extends StatelessWidget {
+  const BottomButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ResultsPage()),
+        );
+      },
+      child: Container(
+        color: kBottomContainerColor,
+        margin: EdgeInsets.only(top: 10.0),
+        padding: EdgeInsets.only(bottom: 10.0),
+        width: double.infinity,
+        height: kBottomContainerHeight,
+        child: Center(
+          child: Text(
+            'CALCUALTE',
+            style: kLargeButtonTextStyle,
+          ),
+        ),
       ),
     );
   }
